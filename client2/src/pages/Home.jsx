@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
 
 function Model(props) {
-  const { nodes, materials } = useGLTF("/monster.gltf");
+  const { nodes, materials } = useGLTF("/monster/monster.gltf");
   return (
     <group {...props} dispose={null}>
       <group
@@ -43,7 +43,7 @@ function Model(props) {
   );
 }
 function Model2(props) {
-  const { nodes, materials } = useGLTF('/professor.gltf')
+  const { nodes, materials } = useGLTF("/professor/professor.gltf");
   return (
     <group {...props} dispose={null}>
       <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
@@ -54,30 +54,47 @@ function Model2(props) {
         <mesh geometry={nodes.Eye_geo.geometry} material={materials.Eyes} />
         <mesh geometry={nodes.Eyebrow_geo.geometry} material={materials.Hair} />
         <mesh geometry={nodes.Hair_geo.geometry} material={materials.Hair} />
-        <mesh geometry={nodes.Pant_geo.geometry} material={materials.PAntandshirt} />
-        <mesh geometry={nodes.Shirt_geo.geometry} material={materials.PAntandshirt} />
+        <mesh
+          geometry={nodes.Pant_geo.geometry}
+          material={materials.PAntandshirt}
+        />
+        <mesh
+          geometry={nodes.Shirt_geo.geometry}
+          material={materials.PAntandshirt}
+        />
         <mesh geometry={nodes.Shoes_geo.geometry} material={materials.Shoe} />
-        <mesh geometry={nodes.Specs_frame_geo.geometry} material={materials.Specs} />
-        <mesh geometry={nodes.Specs_glass_geo.geometry} material={materials.Specs} />
+        <mesh
+          geometry={nodes.Specs_frame_geo.geometry}
+          material={materials.Specs}
+        />
+        <mesh
+          geometry={nodes.Specs_glass_geo.geometry}
+          material={materials.Specs}
+        />
         <mesh geometry={nodes.Teeth_geo.geometry} material={materials.Teeth} />
-        <mesh geometry={nodes.Waistcoat_geo.geometry} material={materials.Coat} />
+        <mesh
+          geometry={nodes.Waistcoat_geo.geometry}
+          material={materials.Coat}
+        />
       </group>
     </group>
-  )
+  );
 }
 function Home() {
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  // const [selectedCharacter, setSelectedCharacter] = useState(null);
 
-  const handleCharacterSelection = (character) => {
-    setSelectedCharacter(character);
-  };
+  // const handleCharacterSelection = (character) => {
+  //   setSelectedCharacter(character);
+  // };
 
   return (
-    <div className="p-3">
-      <h1 className="text-2xl font-bold mb-4">Choose Your Character</h1>
+    <div className="p-3 bg-[#234795] bg-opacity-90">
+      <h1 className="text-2xl font-bold mb-4 text-center text-white py-8">
+        Choose Your Character
+      </h1>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="flex items-center">
+      <div className="">
+        {/* <div className="flex items-center">
           <input
             type="checkbox"
             id="character1"
@@ -90,9 +107,9 @@ function Home() {
           <label htmlFor="character1">
             <img src="character1.png" alt="Character 1" className="w-16 h-16" />
           </label>
-        </div>
+        </div> */}
 
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <input
             type="checkbox"
             id="character2"
@@ -105,74 +122,78 @@ function Home() {
           <label htmlFor="character2">
             <img src="character2.png" alt="Character 2" className="w-16 h-16" />
           </label>
+        </div> */}
+      </div>
+      <div className="flex justify-evenly items-center">
+        <div className="bg-[#1c140f] h-[400px] w-[400px] flex justify-center rounded-[30px]">
+          <Canvas
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Suspense fallback={null}>
+              {/* <directionalLight /> */}
+              <spotLight
+                intensity={0.9}
+                angle={0.1}
+                penumbra={1}
+                position={[10, 15, 10]}
+                castShadow
+              />
+              <Model scale={[1.5, 1.5, 1.5]} position={[0,-2, 0]} /> {/* Adjust scale as needed */}
+              <OrbitControls
+                enablePan={true}
+                enableZoom={false}
+                enableRotate={true}
+                minPolarAngle={Math.PI / 2.1}
+                maxPolarAngle={Math.PI / 2.1}
+              />
+              <Environment preset="sunset" />
+            </Suspense>
+          </Canvas>
         </div>
-
-        {/* Add more divs for other characters */}
+        <div className="bg-[#1c140f] h-[400px] w-[400px] flex justify-center items-center rounded-[30px]">
+          <Canvas
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Suspense fallback={null}>
+              <directionalLight />
+              <spotLight
+                intensity={0.9}
+                angle={0.1}
+                penumbra={1}
+                position={[10, 15, 10]}
+                castShadow
+              />
+              <Model2 scale={[3.5, 3.5, 3.5]} position={[0,-2.4, 0]} />
+              <OrbitControls
+                enablePan={true}
+                enableZoom={false}
+                enableRotate={true}
+                minPolarAngle={Math.PI / 2.1}
+                maxPolarAngle={Math.PI / 2.1}
+              />
+              <Environment preset="sunset" />
+            </Suspense>
+          </Canvas>
+        </div>
       </div>
-
-      <button
-        type="submit"
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Submit
-      </button>
-      <div className="flex justify-between">
-      <div className="bg-[#1c140f] h-[400px] w-[400px] flex justify-center">
-        <Canvas
-          style={{
-            width: 600,
-            height: 600,
-            display: "flex",
-            justifyContent: "center",
-          }}
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className="mt-4 btn text-white font-bold py-2 px-4 rounded mx-auto"
         >
-          <Suspense fallback={null}>
-            {/* <directionalLight /> */}
-            <spotLight
-              intensity={0.9}
-              angle={0.1}
-              penumbra={1}
-              position={[10, 15, 10]}
-              castShadow
-            />
-            <Model />
-            <OrbitControls
-              enablePan={true}
-              enableZoom={false}
-              enableRotate={true}
-            />
-            <Environment preset="sunset" />
-          </Suspense>
-        </Canvas>
-      </div>
-      <div className="bg-[#1c140f] h-[400px] w-[400px] flex justify-center">
-        <Canvas
-          style={{
-            width: 600,
-            height: 600,
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Suspense fallback={null}>
-            <directionalLight />
-            <spotLight
-              intensity={0.9}
-              angle={0.1}
-              penumbra={1}
-              position={[10, 15, 10]}
-              castShadow
-            />
-            <Model2 />
-            <OrbitControls
-              enablePan={true}
-              enableZoom={false}
-              enableRotate={true}
-            />
-            <Environment preset="sunset" />
-          </Suspense>
-        </Canvas>
-      </div>
+          Submit
+        </button>
       </div>
     </div>
   );

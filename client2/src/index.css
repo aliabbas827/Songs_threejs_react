@@ -37,11 +37,5 @@ input:focus {
   box-shadow: 0 0 0 1px rgb(94, 93, 93);
 }
 .btn {
-  /* background: rgb(26, 52, 113);
-  background: linear-gradient(
-    90deg,
-    rgba(26, 52, 113, 1) 38%,
-    rgba(116, 139, 190, 1) 100%
-  ); */
   background-color: #dc7000;
 }
