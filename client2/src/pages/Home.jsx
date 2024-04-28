@@ -15,28 +15,25 @@ function Model(props) {
         <mesh
           geometry={nodes.Body_fur.geometry}
           material={materials.Material}
-          color="red"
+          
         />
         <mesh
           geometry={nodes.eyes.geometry}
           material={materials.lambert2}
           position={[0, 0, 1.113]}
           scale={0.038}
-          color="blue"
         />
         <mesh
           geometry={nodes.Teeth.geometry}
           material={materials.lambert2}
           position={[0, 0, 1.113]}
           scale={0.038}
-          color="green"
         />
         <mesh
           geometry={nodes.Top_Hair.geometry}
           material={materials.lambert2}
           position={[0, 0, 1.113]}
           scale={0.038}
-          color="brown"
         />
       </group>
     </group>
@@ -87,8 +84,19 @@ function Home() {
   //   setSelectedCharacter(character);
   // };
 
+  const [selectedDiv, setSelectedDiv] = useState(null);  // This will track the selected div
+
+  // Function to handle selection
+  const toggleSelection = (divId) => {
+    if (selectedDiv === divId) {
+      setSelectedDiv(null);  // If it's already selected, deselect it
+    } else {
+      setSelectedDiv(divId);  // Else select the new div
+    }
+  };
+
   return (
-    <div className="p-3 bg-[#234795] bg-opacity-90">
+    <div className="p-3 bg-[#234795] bg-opacity-90 h-[90vh]">
       <h1 className="text-2xl font-bold mb-4 text-center text-white py-8">
         Choose Your Character
       </h1>
@@ -125,7 +133,8 @@ function Home() {
         </div> */}
       </div>
       <div className="flex justify-evenly items-center">
-        <div className="bg-[#1c140f] h-[400px] w-[400px] flex justify-center rounded-[30px]">
+        <div  className={`divWithCanvas ${selectedDiv === 'div1' ? 'selected' : ''}`}
+          onClick={() => toggleSelection('div1')}>
           <Canvas
             style={{
               width: "100%",
@@ -155,7 +164,8 @@ function Home() {
             </Suspense>
           </Canvas>
         </div>
-        <div className="bg-[#1c140f] h-[400px] w-[400px] flex justify-center items-center rounded-[30px]">
+        <div className={`divWithCanvas ${selectedDiv === 'div2' ? 'selected' : ''}`}
+          onClick={() => toggleSelection('div2')}>
           <Canvas
             style={{
               width: "100%",
