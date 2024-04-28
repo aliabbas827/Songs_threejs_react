@@ -5,7 +5,7 @@ export default function Header() {
   const user = useSelector((state) => state.user.user.user);
   console.log(user);
   return (
-    <div className="bg-[#234795] text-white ">
+    <div className="bg-[#234795] text-white shadow-2xl">
       <div className="flex justify-between items-center h-[10vh] p-3">
         <h1 className=" font-bold">Auth App</h1>
         <ul className="flex gap-4">
