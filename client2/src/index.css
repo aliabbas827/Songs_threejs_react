@@ -36,13 +36,16 @@ input:focus {
   outline: none;
   box-shadow: 0 0 0 1px rgb(94, 93, 93);
 }
+canvas{
+  border-radius: 50% !important;
+}
 .btn {
   background-color: #dc7000;
 }
 .divWithCanvas {
   background-color: #1c140f;
   height: 400px;
-  width: 400px;
+  width: 400px; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,5 +70,25 @@ input:focus {
 
 
 .divWithCanvas:hover::after, .divWithCanvas.selected::after {
-  border-image: linear-gradient(to right, blue, orange)1;
+  border-image: linear-gradient(to right, #271ab9, #dc7000)1;
+}
+.responsive-canvas {
+  max-width: 600px; /* Adjust as needed */
+  max-height: 600px; /* Adjust as needed */
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .responsive-canvas {
+    max-width: 400px; /* Adjust as needed for medium screens */
+    max-height: 400px; /* Adjust as needed for medium screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .responsive-canvas {
+    max-width: 300px; /* Adjust as needed for small screens */
+    max-height: 300px; /* Adjust as needed for small screens */
+  }
 }
