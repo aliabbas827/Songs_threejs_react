@@ -96,7 +96,7 @@ function Home() {
   };
 
   return (
-    <div className="p-3 bg-[#234795] bg-opacity-90 h-[90vh]">
+    <div className="p-3 bg-[#234795] bg-opacity-90 lg:h-[90vh] h-[190vh]">
       <h1 className="text-2xl font-bold mb-4 text-center text-white py-8">
         Choose Your Character
       </h1>
@@ -132,7 +132,7 @@ function Home() {
           </label>
         </div> */}
       </div>
-      <div className="flex justify-evenly items-center">
+      <div className="flex justify-evenly items-center flex-wrap gap-10">
         <div  className={`divWithCanvas ${selectedDiv === 'div1' ? 'selected' : ''}`}
           onClick={() => toggleSelection('div1')}>
           <Canvas
@@ -142,6 +142,7 @@ function Home() {
               display: "flex",
               justifyContent: "center",
             }}
+            className="responsive-canvas"
           >
             <Suspense fallback={null}>
               {/* <directionalLight /> */}
@@ -174,6 +175,7 @@ function Home() {
               alignItems: "center",
               justifyContent: "center",
             }}
+            className="responsive-canvas"
           >
             <Suspense fallback={null}>
               <directionalLight />
