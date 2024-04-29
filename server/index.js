@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import User from "./routes/User.route.js";
+import User from "./routes/user.route.js";
 import connection from "./configs/connection.js";
 import Auth from "./routes/auth.route.js";
 import bodyParser from "body-parser";

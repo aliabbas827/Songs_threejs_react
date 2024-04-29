@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import { useSelector } from "react-redux";
 import Header from "./components/Header";
 import PrivateRoute from "./components/PrivateRoute";
+import SongSelection from "./pages/SongSelection";
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -18,6 +19,9 @@ function App() {
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/song_selection" element={<SongSelection />} />
         </Route>
         <Route path="/about" element={<About />} />
         <Route path="/signin" element={<Login />} />

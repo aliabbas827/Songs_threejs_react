@@ -1,8 +1,10 @@
 import express from "express";
-import { test } from "../controllers/user.controller.js";
+import { updateCharacter } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.get("/", test);
+// router.get("/", test);
+
+router.put("/update_character/:id", updateCharacter);
 
 export default router;

@@ -1,6 +1,9 @@
 import React, { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
+import { useSelector } from "react-redux";
+
+import { useNavigate } from "react-router-dom";
 
 function Model(props) {
   const { nodes, materials } = useGLTF("/monster/monster.gltf");
@@ -15,7 +18,6 @@ function Model(props) {
         <mesh
           geometry={nodes.Body_fur.geometry}
           material={materials.Material}
-          
         />
         <mesh
           geometry={nodes.eyes.geometry}
@@ -78,20 +80,45 @@ function Model2(props) {
   );
 }
 function Home() {
+  const user = useSelector((state) => state.user.user.user.user);
+
+  const navigate = useNavigate();
+
   // const [selectedCharacter, setSelectedCharacter] = useState(null);
 
   // const handleCharacterSelection = (character) => {
   //   setSelectedCharacter(character);
   // };
 
-  const [selectedDiv, setSelectedDiv] = useState(null);  // This will track the selected div
+  const [selectedDiv, setSelectedDiv] = useState(null); // This will track the selected div
+  const handleSubmit = async () => {
+    try {
+      const data = await fetch(`/api/user/update_character/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ character: selectedDiv }),
+      });
 
+      const response = await data.json();
+
+      if (response.success) {
+        console.log("Character updated successfully");
+      }
+
+      console.log(response);
+      navigate("/song_selection");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // Function to handle selection
   const toggleSelection = (divId) => {
     if (selectedDiv === divId) {
-      setSelectedDiv(null);  // If it's already selected, deselect it
+      setSelectedDiv(null); // If it's already selected, deselect it
     } else {
-      setSelectedDiv(divId);  // Else select the new div
+      setSelectedDiv(divId); // Else select the new div
     }
   };
 
@@ -133,8 +160,12 @@ function Home() {
         </div> */}
       </div>
       <div className="flex justify-evenly items-center flex-wrap gap-10">
-        <div  className={`divWithCanvas ${selectedDiv === 'div1' ? 'selected' : ''}`}
-          onClick={() => toggleSelection('div1')}>
+        <div
+          className={`divWithCanvas ${
+            selectedDiv === "Monster" ? "selected" : ""
+          }`}
+          onClick={() => toggleSelection("Monster")}
+        >
           <Canvas
             style={{
               width: "100%",
@@ -153,7 +184,8 @@ function Home() {
                 position={[10, 15, 10]}
                 castShadow
               />
-              <Model scale={[1.5, 1.5, 1.5]} position={[0,-2, 0]} /> {/* Adjust scale as needed */}
+              <Model scale={[1.5, 1.5, 1.5]} position={[0, -2, 0]} />{" "}
+              {/* Adjust scale as needed */}
               <OrbitControls
                 enablePan={true}
                 enableZoom={false}
@@ -165,8 +197,12 @@ function Home() {
             </Suspense>
           </Canvas>
         </div>
-        <div className={`divWithCanvas ${selectedDiv === 'div2' ? 'selected' : ''}`}
-          onClick={() => toggleSelection('div2')}>
+        <div
+          className={`divWithCanvas ${
+            selectedDiv === "Professor" ? "selected" : ""
+          }`}
+          onClick={() => toggleSelection("Professor")}
+        >
           <Canvas
             style={{
               width: "100%",
@@ -186,7 +222,7 @@ function Home() {
                 position={[10, 15, 10]}
                 castShadow
               />
-              <Model2 scale={[3.5, 3.5, 3.5]} position={[0,-2.4, 0]} />
+              <Model2 scale={[3.5, 3.5, 3.5]} position={[0, -2.4, 0]} />
               <OrbitControls
                 enablePan={true}
                 enableZoom={false}
@@ -201,6 +237,7 @@ function Home() {
       </div>
       <div className="flex justify-center">
         <button
+          onClick={handleSubmit}
           type="submit"
           className="mt-4 btn text-white font-bold py-2 px-4 rounded mx-auto"
         >
