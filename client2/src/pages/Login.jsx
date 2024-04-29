@@ -29,7 +29,7 @@ export default function Signup() {
     e.preventDefault();
 
     dispatch(signinStart());
-    console.log(formData);
+
     try {
       const res = await fetch("/api/auth/signin", {
         method: "POST",
