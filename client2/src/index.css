@@ -58,19 +58,20 @@ canvas{
 .divWithCanvas::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 30px;
-  border: 5px solid transparent;
+  top: 0.1px;
+  left: 0.1px;
+  right: 0.1px;
+  bottom: 0.1px;
+  border: 9px solid transparent;
   transition: border 0.3s ease;
   pointer-events: none;
+  border-radius: 30px;
 }
 
 
 .divWithCanvas:hover::after, .divWithCanvas.selected::after {
-  border-image: linear-gradient(to right, #271ab9, #dc7000)1;
+  border: 10px solid #dc7000;
+  border-radius: 30px;
 }
 .responsive-canvas {
   max-width: 600px; /* Adjust as needed */
