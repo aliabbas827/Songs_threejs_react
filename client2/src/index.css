@@ -58,10 +58,10 @@ canvas{
 .divWithCanvas::after {
   content: '';
   position: absolute;
-  top: 0.1px;
-  left: 0.1px;
-  right: 0.1px;
-  bottom: 0.1px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border: 9px solid transparent;
   transition: border 0.3s ease;
   pointer-events: none;
