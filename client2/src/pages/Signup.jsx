@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signinStart, signinFail } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Oauth from "../components/Oauth";
 
 export default function Signup() {
   const navigate = useNavigate();
