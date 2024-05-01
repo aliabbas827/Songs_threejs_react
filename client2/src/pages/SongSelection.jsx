@@ -1,17 +1,20 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import Recorder from "../components/Recorder";
 
 export default function SongSelection() {
   const [songs, setSongs] = useState([]);
+  const [songSelected, setSongSelected] = useState("");
   const [error, setError] = useState(null);
   const [token, setToken] = useState("");
   const user = useSelector((state) => state.user.user.user.user);
 
   const getSongs = async () => {
+    // only get music of song like karaoke
     try {
       const response = await fetch(
-        "https://api.spotify.com/v1/search?q=genre:all&type=track&limit=10",
+        `https://api.spotify.com/v1/albums/4Q6vPI3bZK7guOKUzr9ijk`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -20,18 +23,16 @@ export default function SongSelection() {
       );
 
       const data = await response.json();
+      console.log(data);
 
       setSongs(data.tracks.items);
     } catch (error) {
       setError("Error fetching data");
     }
   };
+
   const getToken = async () => {
     try {
-      //   curl -X POST "https://accounts.spotify.com/api/token" \
-      //  -H "Content-Type: application/x-www-form-urlencoded" \
-      //  -d "grant_type=client_credentials&client_id=your-client-id&client_secret=your-client-secret"
-
       const response = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
         headers: {
@@ -58,34 +59,44 @@ export default function SongSelection() {
   }
 
   return (
-    <div>
-      <h1>Thanks for choosing character</h1>
-      <h2>{user.username}</h2>
-      <img
-        src={user?.profilePicture}
-        className=" h-20 w-20 rounded-full"
-        alt="profile pic"
-      />
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">
+        Thanks for choosing a character
+      </h1>
+      <div className="flex items-center mb-4">
+        <h2 className="text-xl mr-2">{user.username}</h2>
+        <img
+          src={user?.profilePicture}
+          className="w-12 h-12 rounded-full"
+          alt="profile pic"
+        />
+      </div>
+      <div className="mb-4">
+        {user?.character === "Professor" ? (
+          <h1>Professor</h1>
+        ) : (
+          <h1>Student</h1>
+        )}
+      </div>
 
-      {user?.character === "Professor" ? <h1>Professor</h1> : <h1>Student</h1>}
-
-      <h3>Choose a Song</h3>
+      <h3>Choose your music</h3>
 
       {songs.map((song) => (
-        <div key={song.id} className="flex gap-10">
-          <div className="flex items-center justify-center">
-            <h4>{song.name}</h4>
-            <img
-              className="w-20 h-20 rounded-full"
-              src={song.album.images[0].url}
-              alt="song"
-            />
-            <audio controls>
+        <div key={song.id} className="flex items-center gap-4 mb-4">
+          <div>
+            <h4 className="text-lg font-semibold">{song.name}</h4>
+            <audio controls className="mt-1">
               <source src={song.preview_url} type="audio/mpeg" />
             </audio>
           </div>
         </div>
       ))}
+
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold mb-2">Sing a song</h3>
+        {/*  or text */}
+        <Recorder selectedUrl={songSelected} />
+      </div>
     </div>
   );
 }
