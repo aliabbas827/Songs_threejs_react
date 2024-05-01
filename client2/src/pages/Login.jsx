@@ -9,7 +9,6 @@ import {
 } from "../redux/user/userSlice";
 
 import { useDispatch } from "react-redux";
-import Oauth from "../components/Oauth";
 export default function Signup() {
   const [formData, setFormData] = useState({});
 
@@ -68,8 +67,9 @@ export default function Signup() {
     }
   };
   return (
-    <div className="max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">SignIn</h1>
+    <section className="bg-[#234795] h-[90vh] flex justify-center items-center">
+    <div className="mx-auto lg:w-[30%] md:w-[70%] w-[95%] bg-[#1c140f] backdrop-blur-lg backdrop-filter rounded-2xl p-6 shadow-2xl">
+      <h1 className=" text-3xl font-semibold text-gray-200 text-center my-7">SignIn</h1>
       <form
         onSubmit={handleSubmit}
         className="flex w-full flex-col gap-4 items-center"
@@ -78,20 +78,19 @@ export default function Signup() {
           type="email"
           id="email"
           placeholder="Email"
-          className="border w-full bg-slate-100 border-gray-400 p-3 rounded-lg my-2"
+          className="w-full p-3 rounded-lg my-2"
           onChange={handleChange}
         />
         <input
           type="password"
           id="password"
           placeholder="Password"
-          className="border w-full bg-slate-100 border-gray-400 p-3 rounded-lg my-2"
+          className="w-full p-3 rounded-lg my-2"
           onChange={handleChange}
         />
-        <button className="bg-slate-700 w-full text-white p-3 rounded-lg disabled:opacity-80 uppercase hover:opacity-95 my-2">
+        <button className=" btn text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80 shadow-md my-2 w-full">
           {loading ? "Loading" : "Sign In"}
         </button>
-        <Oauth />
 
         {error && (
           <div className="bg-red-100 text-red-700 p-3 rounded-lg my-2">
@@ -102,12 +101,13 @@ export default function Signup() {
       <div className=" ">
         <Link
           to="/signup"
-          className=" flex  gap-2 mt-5 items-center text-center "
+          className=" flex text-white gap-2 mt-5 items-center text-center "
         >
           <p className=" p-0 m-0">Don&apos;t have a an account?</p>
-          <span className="text-blue-500 p-0 m-0">Signup</span>
+          <span className="p-0 m-0 text-orange-400">Signup</span>
         </Link>
       </div>
     </div>
+    </section>
   );
 }
