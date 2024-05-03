@@ -179,116 +179,119 @@ const SongSelection = () => {
         <h2 className="text-xl mr-2">{user.username}</h2>
         <img
           src={user?.profilePicture}
-          className="w-12 h-12 rounded-full"
+          className="w-12 h-12 rounded-full object-cover"
           alt="profile pic"
         />
       </div>
       <div className="mb-4">
         {user?.character === "Professor" ? (
-          <div
-          className="bg-[#1c140f] rounded-2xl h-[300px]"
-        >
-          <Canvas
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            className="responsive-canvas"
-          >
-            <Suspense fallback={null}>
-              <directionalLight />
-              <spotLight
-                intensity={0.9}
-                angle={0.1}
-                penumbra={1}
-                position={[10, 15, 10]}
-                castShadow
-              />
-              <Model2 scale={[3.5, 3.5, 3.5]} position={[0, -2.4, 0]} />
-              <OrbitControls
-                enablePan={true}
-                enableZoom={false}
-                enableRotate={true}
-                minPolarAngle={Math.PI / 2.1}
-                maxPolarAngle={Math.PI / 2.1}
-              />
-              <Environment preset="sunset" />
-            </Suspense>
-          </Canvas>
-        </div>
+          <div className="bg-[#1c140f] rounded-2xl h-[300px]">
+            <Canvas
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              className="responsive-canvas"
+            >
+              <Suspense fallback={null}>
+                <directionalLight />
+                <spotLight
+                  intensity={0.9}
+                  angle={0.1}
+                  penumbra={1}
+                  position={[10, 15, 10]}
+                  castShadow
+                />
+                <Model2 scale={[3.5, 3.5, 3.5]} position={[0, -2.4, 0]} />
+                <OrbitControls
+                  enablePan={true}
+                  enableZoom={false}
+                  enableRotate={true}
+                  minPolarAngle={Math.PI / 2.1}
+                  maxPolarAngle={Math.PI / 2.1}
+                />
+                <Environment preset="sunset" />
+              </Suspense>
+            </Canvas>
+          </div>
         ) : (
           <div className="flex justify-evenly items-center flex-wrap gap-10">
-        <div
-          className= "bg-[#1c140f] rounded-2xl h-[300px]"
-        >
-          <Canvas
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-            }}
-            className="responsive-canvas"
-          >
-            <Suspense fallback={null}>
-              {/* <directionalLight /> */}
-              <spotLight
-                intensity={0.9}
-                angle={0.1}
-                penumbra={1}
-                position={[10, 15, 10]}
-                castShadow
-              />
-              <Model scale={[1.5, 1.5, 1.5]} position={[0, -2, 0]} />{" "}
-              {/* Adjust scale as needed */}
-              <OrbitControls
-                enablePan={true}
-                enableZoom={false}
-                enableRotate={true}
-                minPolarAngle={Math.PI / 2.1}
-                maxPolarAngle={Math.PI / 2.1}
-              />
-              <Environment preset="sunset" />
-            </Suspense>
-          </Canvas>
-        </div>
-      </div>
+            <div className="bg-[#1c140f] rounded-2xl h-[300px]">
+              <Canvas
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+                className="responsive-canvas"
+              >
+                <Suspense fallback={null}>
+                  {/* <directionalLight /> */}
+                  <spotLight
+                    intensity={0.9}
+                    angle={0.1}
+                    penumbra={1}
+                    position={[10, 15, 10]}
+                    castShadow
+                  />
+                  <Model scale={[1.5, 1.5, 1.5]} position={[0, -2, 0]} />{" "}
+                  {/* Adjust scale as needed */}
+                  <OrbitControls
+                    enablePan={true}
+                    enableZoom={false}
+                    enableRotate={true}
+                    minPolarAngle={Math.PI / 2.1}
+                    maxPolarAngle={Math.PI / 2.1}
+                  />
+                  <Environment preset="sunset" />
+                </Suspense>
+              </Canvas>
+            </div>
+          </div>
         )}
       </div>
 
-     <div className="mt-12 flex justify-center">
-     <h3 className="text-2xl font-bold mb-6 bg-[#1c140f] rounded-md text-white p-3">Choose your music</h3>
-     </div>
-      
-      <div className="flex items-center flex-wrap gap-5 justify-around">
-      {hardcoded_songs.map((song) => (
-        <div key={song.id} className=" text-white mb-4">
-          
-            <h4 className="text-lg font-semibold">{song.name}</h4>
-
-            <div className="flex items-center gap-4 mt-4">
-            <audio controls >
-              <source src={song.preview_url} type="audio/mpeg" />
-            </audio>
-   
-          <button onClick={() => handleSongSelect(song)} className=" btn text-white font-bold py-2 px-4 rounded hover:bg-white hover:border-orange-400 hover:text-orange-400 hover:transition-all hover:ease-in-out hover:duration-300">Select</button>
-          </div>
-        </div>
-      ))}
+      <div className="mt-12 flex justify-center">
+        <h3 className="text-2xl font-bold mb-6 bg-[#1c140f] rounded-md text-white p-3">
+          Choose your music
+        </h3>
       </div>
-      
+
+      <div className="flex items-center flex-wrap gap-5 justify-around">
+        {hardcoded_songs.map((song) => (
+          <div key={song.id} className=" text-white mb-4">
+            <h4 className="text-lg font-semibold">{song.name}</h4>
+            <div className="flex items-center flex-col md:flex-row gap-4 mt-4">
+              <audio controls className="">
+                <source src={song.preview_url} type="audio/mpeg" />
+              </audio>
+              <button
+                onClick={() => handleSongSelect(song)}
+                className=" btn text-white font-bold py-2 px-4 rounded hover:bg-white hover:border-orange-400 hover:text-orange-400 hover:transition-all hover:ease-in-out hover:duration-300"
+              >
+                Select
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
 
       <div>
         <div className="py-6 flex justify-center">
-        <h1 className="text-2xl font-bold mb-3 bg-[#1c140f] rounded-md text-white p-3 ">Selected Music</h1>
+          <h1 className="text-2xl font-bold mb-3 bg-[#1c140f] rounded-md text-white p-3 ">
+            Selected Music
+          </h1>
         </div>
-        
+
         {selectedSong && (
           <div className="flex flex-col items-center gap-4">
-            <h4 className="text-lg font-semibold text-white">{selectedSong.name}</h4>
+            <h4 className="text-lg font-semibold text-white">
+              {selectedSong.name}
+            </h4>
             <audio controls>
               <source src={selectedSong.preview_url} type="audio/mpeg" />
             </audio>
@@ -298,21 +301,26 @@ const SongSelection = () => {
 
       <div className="mb-4">
         <div className=" mt-12 flex justify-center">
-        <h3 className="text-2xl font-bold mb-3 bg-[#1c140f] rounded-md text-white p-3">Sing a song</h3>
+          <h3 className="text-2xl font-bold mb-3 bg-[#1c140f] rounded-md text-white p-3">
+            Sing a song
+          </h3>
         </div>
-        <div className=" mt-3">
+        <div className=" mt-3 flex justify-center">
+          <Recorder
+            recordedAudio={recordedAudio}
+            setRecordedAudio={setRecordedAudio}
+          />
+        </div>
 
-        <Recorder
-          recordedAudio={recordedAudio}
-          setRecordedAudio={setRecordedAudio}
-        />
-        </div>
-       
         {selectedSong && recordedAudio && (
           <div className="flex justify-center mt-12">
-<button onClick={handleMixAudio} className="btn text-white font-bold py-2 px-4 rounded hover:bg-white hover:border-orange-400 hover:text-orange-400 hover:transition-all hover:ease-in-out hover:duration-300">Create Your Song</button>
+            <button
+              onClick={handleMixAudio}
+              className="btn text-white font-bold py-2 px-4 rounded hover:bg-white hover:border-orange-400 hover:text-orange-400 hover:transition-all hover:ease-in-out hover:duration-300"
+            >
+              Create Your Song
+            </button>
           </div>
-          
         )}
       </div>
 
