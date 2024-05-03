@@ -207,7 +207,7 @@ function Home() {
         <button
           onClick={handleSubmit}
           type="submit"
-          className="mt-4 btn text-white font-bold py-2 px-4 rounded mx-auto"
+          className="mt-4 btn text-white font-bold py-2 px-4 rounded mx-auto hover:bg-white hover:border-orange-400 hover:text-orange-400 hover:transition-all hover:ease-in-out hover:duration-300"
         >
           Submit
         </button>

@@ -172,10 +172,10 @@ const SongSelection = () => {
 
   return (
     <div className="p-4 bg-[#234795] bg-opacity-90">
-      <h1 className="text-2xl font-bold mb-4">
+      <h1 className="text-2xl font-bold mb-4 text-center text-white py-6">
         Thanks for choosing a character
       </h1>
-      <div className="flex items-center mb-4">
+      <div className="flex items-center justify-center pb-7 text-center text-white">
         <h2 className="text-xl mr-2">{user.username}</h2>
         <img
           src={user?.profilePicture}
@@ -259,25 +259,36 @@ const SongSelection = () => {
         )}
       </div>
 
-      <h3>Choose your music</h3>
-
+     <div className="mt-12 flex justify-center">
+     <h3 className="text-2xl font-bold mb-6 bg-[#1c140f] rounded-md text-white p-3">Choose your music</h3>
+     </div>
+      
+      <div className="flex items-center flex-wrap gap-5 justify-around">
       {hardcoded_songs.map((song) => (
-        <div key={song.id} className="flex items-center gap-4 mb-4">
-          <div>
+        <div key={song.id} className=" text-white mb-4">
+          
             <h4 className="text-lg font-semibold">{song.name}</h4>
-            <audio controls className="mt-1">
+
+            <div className="flex items-center gap-4 mt-4">
+            <audio controls >
               <source src={song.preview_url} type="audio/mpeg" />
             </audio>
+   
+          <button onClick={() => handleSongSelect(song)} className=" btn text-white font-bold py-2 px-4 rounded hover:bg-white hover:border-orange-400 hover:text-orange-400 hover:transition-all hover:ease-in-out hover:duration-300">Select</button>
           </div>
-          <button onClick={() => handleSongSelect(song)}>Select</button>
         </div>
       ))}
+      </div>
+      
 
       <div>
-        <h1>Selected Music</h1>
+        <div className="py-6 flex justify-center">
+        <h1 className="text-2xl font-bold mb-3 bg-[#1c140f] rounded-md text-white p-3 ">Selected Music</h1>
+        </div>
+        
         {selectedSong && (
-          <div>
-            <h4>{selectedSong.name}</h4>
+          <div className="flex flex-col items-center gap-4">
+            <h4 className="text-lg font-semibold text-white">{selectedSong.name}</h4>
             <audio controls>
               <source src={selectedSong.preview_url} type="audio/mpeg" />
             </audio>
@@ -286,13 +297,22 @@ const SongSelection = () => {
       </div>
 
       <div className="mb-4">
-        <h3 className="text-lg font-semibold mb-2">Sing a song</h3>
+        <div className=" mt-12 flex justify-center">
+        <h3 className="text-2xl font-bold mb-3 bg-[#1c140f] rounded-md text-white p-3">Sing a song</h3>
+        </div>
+        <div className=" mt-3">
+
         <Recorder
           recordedAudio={recordedAudio}
           setRecordedAudio={setRecordedAudio}
         />
+        </div>
+       
         {selectedSong && recordedAudio && (
-          <button onClick={handleMixAudio}>Create Your Song</button>
+          <div className="flex justify-center mt-12">
+<button onClick={handleMixAudio} className="btn text-white font-bold py-2 px-4 rounded hover:bg-white hover:border-orange-400 hover:text-orange-400 hover:transition-all hover:ease-in-out hover:duration-300">Create Your Song</button>
+          </div>
+          
         )}
       </div>
 

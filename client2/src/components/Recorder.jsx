@@ -9,7 +9,7 @@ const Recorder = () => {
     setAudioUrl(url);
   };
   return (
-    <div>
+    <div className="flex">
       <AudioRecorder
         record={true}
         title={"New recording"}
