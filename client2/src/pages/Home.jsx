@@ -127,38 +127,6 @@ function Home() {
       <h1 className="text-2xl font-bold mb-4 text-center text-white py-8">
         Choose Your Character
       </h1>
-
-      <div className="">
-        {/* <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="character1"
-            name="character"
-            value="character1"
-            checked={selectedCharacter === "character1"}
-            onChange={() => handleCharacterSelection("character1")}
-            className="mr-2"
-          />
-          <label htmlFor="character1">
-            <img src="character1.png" alt="Character 1" className="w-16 h-16" />
-          </label>
-        </div> */}
-
-        {/* <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="character2"
-            name="character"
-            value="character2"
-            checked={selectedCharacter === "character2"}
-            onChange={() => handleCharacterSelection("character2")}
-            className="mr-2"
-          />
-          <label htmlFor="character2">
-            <img src="character2.png" alt="Character 2" className="w-16 h-16" />
-          </label>
-        </div> */}
-      </div>
       <div className="flex justify-evenly items-center flex-wrap gap-10">
         <div
           className={`divWithCanvas ${
